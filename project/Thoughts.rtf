@@ -1,0 +1,43 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c13333\c13333\c13333;\cssrgb\c100000\c100000\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15440\viewh9680\viewkind0
+\deftab720
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl220\partightenfactor0
+\ls1\ilvl0
+\f0\fs24 \cf2 \cb3 {\listtext	\uc0\u8226 	}done - \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 get game data from html file\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}done - \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 parse it, get it into form that can be read\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}done - \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 read data, game by game obtain team1, team2, score1, score2\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}done - \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 assign points, obtain team1points, team2points\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}done - \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 create dataframe, columns = team, wins, losses, points, strength of record, total points, rank\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 go game by game, find team in dataframe, update wins, update losses, update points\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 After all games, rank all teams in order of their points.\'a0\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Calculate strength of record: Go back game by game and award points to teams who beat higher ranked teams or top 25 teams.\'a0\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Calculate total points.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Rank teams in order of total points.\'a0\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Repeat strength of record loop until no changes.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Present rankings as current ranking.\'a0\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Pass teams, record, and rank to html form, compare to AP poll, coaches poll, sagarin, etc\'a0\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Calculate deltas between this poll and those polls.\'a0\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+Probably need to create a data frame for games\
+Columns = [\'91Date\'92, \'91Location\'92, \'91Winning Team\'92, \'91Winning Score\'92, \'91Losing Team\'92, \'91Losing Score\'92, \'91Winning Points\'92, \'91Losing Points\'92, \'91Winning SOR\'92, \'91Losing SOR\'92, \'91Winning Total\'92, \'91Losing Total\'92]}

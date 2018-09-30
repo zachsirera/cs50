@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> 
+		Zach's CFB Poll
+	</title>
+	<style>
+		table, th, td {
+    		border-collapse: collapse;
+		}
+
+		table {
+			position: absolute;
+			z-index: 1;
+			top: -100px;
+		}
+
+		th, td {
+    		padding: 15px;
+		}
+
+		th {
+    		text-align: left;
+    		background-color: #4CAF50;
+    		color: white;
+		}
+
+		* {
+      		font-family: Courier New;
+    	}
+
+    	ul {
+		    list-style-type: none;
+		    margin: 0;
+		    padding: 0;
+		    width: 15%;
+		    background-color: #f1f1f1;
+		    position: fixed;
+		    height: 100%;
+		    overflow: auto;
+		    top: 16.25%;
+		}
+
+		li a {
+		    display: block;
+		    color: #000;
+		    padding: 8px 16px;
+		    text-decoration: none;
+		}
+
+		li a.active {
+		    background-color: #4CAF50;
+		    color: white;
+		}
+
+		li a:hover:not(.active) {
+		    background-color: #555;
+		    color: white;
+		}
+
+		.header {
+		  	padding: 10px 16px;
+		  	background: #555555;
+		  	color: #f1f1f1;
+		  	position: fixed;
+		  	top: 0;
+		  	width: 100%
+		}
+
+		div {
+			opacity: 100%;
+			z-index: 2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f1f1f1;
+		}
+
+		tr:hover {
+			background-color: #555555;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div style="opacity: 1" class="header" id="Page Header">
+		<h2> 
+			Zach's CFB Rankings - Updated {{ updated }}
+		</h2>
+		<p>
+			Full list of all games involving a D1 FBS team
+		</p>
+	</div>
+	<ul>
+	  	<li><a href="/">Top 25</a></li>
+	  	<li><a href="/teams">All Teams</a></li>
+	  	<li><a class="active" href="/games">All Games</a></li>
+	  	<li><a href="/chart">Chart - Top 25</a></li>
+	  	<li><a href="/method">Poll Methodology</a></li>
+	</ul>
+	<table style="margin-left:16%; padding: 100px; top: 18.75%;">
+		<tr style="font-size:160%;">
+            <th> Date </th>
+            <th> Winning Team </th>
+            <th> Score </th>
+            <th> Points Earned </th>
+            <th> Losing Team </th>
+            <th> Score </th>
+            <th> Points Earned </th>
+
+        </tr>
+	{% for key, value in games.iterrows() %}
+		<tr>
+			<td> {{ value['Date'] }} </td>
+			<td> {{ value['Winning Team'] }} </td>
+			<td> {{ value['1 Score'] }} </td>
+			<td> {{ value['1 Total'] }} </td>
+			<td> {{ value['Losing Team'] }} </td>
+			<td> {{ value['2 Score'] }} </td>
+			<td> {{ value['2 Total'] }} </td>
+		</tr>
+	{% endfor %}
+	</table>
+
+</body>
+</html>
+
+'Date', 'Winning Team', '1 Score', '1 Points', '1 SOR', 'Losing Team', '2 Score', '2 Points', '2 SOR'
