@@ -1,0 +1,129 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0
+\f0\fs24 \cf0 // This is a program to implement whodunit as part of CS50 Problem Set 4\
+// Zach Sirera\
+// 6/25/2018 to 7/2/2018\
+\
+\
+#include <stdio.h>\
+#include <stdlib.h>\
+\
+#include "bmp.h"\
+\
+\
+int main (int argc, char *argv[])\
+\{\
+    // Ensure that the number of command line arguments is 2 and only 2.\
+    if (argc != 3)\
+    \{\
+        printf("Usage: ./whodunit infile outfile\\n");\
+        return 1;\
+    \}\
+\
+    // Remember filenames\
+    char *infile = argv[1];\
+    char *outfile = argv[2];\
+\
+    // Open input file\
+    FILE *inptr = fopen(infile, "r");\
+    if (inptr == NULL)\
+    \{\
+        fprintf(stderr, "Could not open %s. \\n", infile);\
+        return 2;\
+    \}\
+\
+    // Open output file\
+    FILE *outptr = fopen(outfile, "w");\
+    if (outptr == NULL)\
+    \{\
+        fclose(inptr);\
+        fprintf(stderr, "Could not write %s. \\n", outfile);\
+        return 3;\
+    \}\
+\
+    // read infile's BITMAPFILEHEADER\
+    BITMAPFILEHEADER bf;\
+    fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);\
+\
+    // read infile's BITMAPINFOHEADER\
+    BITMAPINFOHEADER bi;\
+    fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);\
+\
+    // ensure infile is (likely) a 24-bit uncompressed BMP 4.0\
+    if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||\
+        bi.biBitCount != 24 || bi.biCompression != 0)\
+    \{\
+        fclose(outptr);\
+        fclose(inptr);\
+        fprintf(stderr, "Unsupported file format.\\n");\
+        return 4;\
+    \}\
+\
+    // Write outfile's BITMAPFILEHEADER\
+    fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);\
+\
+    // Write outfile's BITMAPINFOHEADER\
+    fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);\
+\
+    // Determine padding for scanlines\
+    int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;\
+\
+    // Iterate over infile's scanlines\
+    for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)\
+    \{\
+        // Iterate over pixels in scanline\
+        for (int j = 0; j < bi.biWidth; j++)\
+        \{\
+            // Temporary storage\
+            RGBTRIPLE triple;\
+\
+            // Read RGB triple from infile\
+            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);\
+\
+\
+            // Rewrite bytes in triple to "retain" only those components that are not pure red or white\
+\
+            if (triple.rgbtRed != 0xff && triple.rgbtRed != 0x00)\
+            \{\
+                triple.rgbtBlue = 0xff;\
+                triple.rgbtGreen = 0xff;\
+                triple.rgbtRed = 0xff;\
+            \}\
+            else\
+            \{\
+                triple.rgbtBlue = 0x00;\
+                triple.rgbtGreen = 0x00;\
+                triple.rgbtRed = 0x00;\
+            \}\
+\
+\
+            // Write RGB triple to outfile\
+            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);\
+        \}\
+\
+        // Skip over padding, if any\
+        fseek(inptr, padding, SEEK_CUR);\
+\
+        // Then add it back (to demonstrate how)\
+        for (int k = 0; k < padding; k++)\
+        \{\
+            fputc(0x00, outptr);\
+        \}\
+    \}\
+\
+    // Close infile\
+    fclose(inptr);\
+\
+    // Close outfile\
+    fclose(outptr);\
+\
+    // success\
+    return 0;\
+\}}
