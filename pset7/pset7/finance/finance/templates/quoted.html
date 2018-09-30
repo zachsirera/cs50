@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+<p>
+    A share of {{ stock.name }} ({{ stock.symbol }}) costs {{ price | usd }}.
+</p>
+
+<!-- put a button here that will redirect to buy with this symbol already stored. Also put a button that will redirect back to quote to obtain another quote. -->
+<form action="/buy">
+    <button class="btn btn-primary" type="submit">Buy It</button>
+</form>
+</br>
+<form action="/quote">
+    <button class="btn btn-primary" type="submit">Get Another Quote</button>
+</form>
+
+
+{% endblock %}
